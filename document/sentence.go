@@ -67,10 +67,10 @@ func (d *parseDecoder) Decode(start int) (parse *Parse, end int, err error) {
 	for current := p + 1; current < len(d.rawParse); current++ {
 		if d.rawParse[current] == '(' {
 			child, end, err := d.Decode(current)
-
 			if err != nil {
 				return nil, -1, err
 			}
+
 			child.Parent = parse
 			parse.Children = append(parse.Children, child)
 			current = end
