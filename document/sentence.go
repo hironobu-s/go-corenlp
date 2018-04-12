@@ -27,8 +27,9 @@ type Parse struct {
 
 func (s *Sentence) Parse() (*Parse, error) {
 	tokens := make(map[int]*Token, len(s.Tokens)+1)
-	for _, t := range s.Tokens {
-		tokens[t.Index] = &t
+	for i := 0; i < len(s.Tokens); i++ {
+		index := s.Tokens[i].Index
+		tokens[index] = &s.Tokens[i]
 	}
 
 	replacer := strings.NewReplacer("\n", "", "\t", "")
