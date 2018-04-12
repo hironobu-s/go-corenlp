@@ -37,7 +37,7 @@ func (s *Sentence) Parse() (*Parse, error) {
 	decoder := parseDecoder{
 		rawParse:   rawParse,
 		parseIndex: 0,
-		tokenIndex: tokens[0].Index,
+		tokenIndex: s.Tokens[0].Index,
 		tokens:     tokens,
 	}
 
