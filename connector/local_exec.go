@@ -1,4 +1,4 @@
-package provider
+package connector
 
 import (
 	"bytes"
@@ -45,7 +45,7 @@ func NewLocalExec(ctx context.Context) *LocalExec {
 	}
 }
 
-func (p *LocalExec) Run(text string) (response Response, err error) {
+func (c *LocalExec) Run(text string) (response Response, err error) {
 	// create tmp file which write the input text
 	tmp, err := ioutil.TempFile("", "go-corenlp")
 	if err != nil {
@@ -63,24 +63,24 @@ func (p *LocalExec) Run(text string) (response Response, err error) {
 	defer os.Remove(outputFile)
 
 	// build arguments
-	args := p.JavaArgs
+	args := c.JavaArgs
 
-	if p.ClassPath != "" {
-		args = append(args, "-cp", p.ClassPath)
+	if c.ClassPath != "" {
+		args = append(args, "-cp", c.ClassPath)
 	}
 
-	if p.Class != "" {
-		args = append(args, p.Class)
+	if c.Class != "" {
+		args = append(args, c.Class)
 	}
 
-	args = append(args, p.CoreNlpArgs...)
+	args = append(args, c.CoreNlpArgs...)
 
-	if p.Props != "" {
-		args = append(args, "-props", p.Props)
+	if c.Props != "" {
+		args = append(args, "-props", c.Props)
 	}
 
-	if len(p.Annotators) > 0 {
-		args = append(args, "-annotators", strings.Join(p.Annotators, ","))
+	if len(c.Annotators) > 0 {
+		args = append(args, "-annotators", strings.Join(c.Annotators, ","))
 	}
 
 	args = append(args,
@@ -95,7 +95,7 @@ func (p *LocalExec) Run(text string) (response Response, err error) {
 	)
 
 	// execute command
-	cmd := exec.CommandContext(p.ctx, p.JavaCmd, args...)
+	cmd := exec.CommandContext(c.ctx, c.JavaCmd, args...)
 	logrus.Debugf("Run command [%s]", strings.Join(cmd.Args, " "))
 
 	stdout := &bytes.Buffer{}

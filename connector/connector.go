@@ -1,4 +1,4 @@
-package provider
+package connector
 
 import (
 	"io"
@@ -6,6 +6,6 @@ import (
 
 type Response io.ReadCloser
 
-type Provider interface {
+type Connector interface {
 	Run(string) (Response, error)
 }

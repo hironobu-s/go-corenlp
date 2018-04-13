@@ -4,11 +4,11 @@ import (
 	"encoding/json"
 	"io/ioutil"
 
+	"github.com/hironobu-s/go-corenlp/connector"
 	"github.com/hironobu-s/go-corenlp/document"
-	"github.com/hironobu-s/go-corenlp/provider"
 )
 
-func Annotate(p provider.Provider, text string) (root *document.Document, err error) {
+func Annotate(p connector.Connector, text string) (root *document.Document, err error) {
 	response, err := p.Run(text)
 	if err != nil {
 		return nil, err

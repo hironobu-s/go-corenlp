@@ -1,4 +1,4 @@
-package provider
+package connector
 
 import (
 	"context"
@@ -28,27 +28,27 @@ func NewHttpClient(ctx context.Context, endpoint string) *HttpClient {
 	}
 }
 
-func (p *HttpClient) buildRequest(text string) (*http.Request, error) {
-	u, err := url.Parse(p.Endpoint)
+func (c *HttpClient) buildRequest(text string) (*http.Request, error) {
+	u, err := url.Parse(c.Endpoint)
 	if err != nil {
 		return nil, err
 	}
 
 	// parameters for CoreNLP server
 	params := map[string]interface{}{
-		"annotators":   strings.Join(p.Annotators, ","),
+		"annotators":   strings.Join(c.Annotators, ","),
 		"outputFormat": "json",
 	}
 
-	deadline, ok := p.ctx.Deadline()
+	deadline, ok := c.ctx.Deadline()
 	if ok {
 		d := deadline.Sub(time.Now()).Seconds()
 		params["timeout"] = d / float64(time.Millisecond)
 	}
 
-	if p.Username != "" && p.Password != "" {
-		params["username"] = p.Username
-		params["password"] = p.Password
+	if c.Username != "" && c.Password != "" {
+		params["username"] = c.Username
+		params["password"] = c.Password
 	}
 
 	props, err := json.Marshal(params)
@@ -71,13 +71,13 @@ func (p *HttpClient) buildRequest(text string) (*http.Request, error) {
 	return req, err
 }
 
-func (p *HttpClient) Run(text string) (response Response, err error) {
-	req, err := p.buildRequest(text)
+func (c *HttpClient) Run(text string) (response Response, err error) {
+	req, err := c.buildRequest(text)
 	if err != nil {
 		return nil, err
 	}
 
-	req = req.WithContext(p.ctx)
+	req = req.WithContext(c.ctx)
 
 	tr := &http.Transport{}
 	cli := &http.Client{Transport: tr}
