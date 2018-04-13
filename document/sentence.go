@@ -26,6 +26,10 @@ type Parse struct {
 }
 
 func (s *Sentence) Parse() (*Parse, error) {
+	if s.RawParse == "" {
+		return nil, fmt.Errorf("No parse data. (Did you enable 'parse' annotator?)")
+	}
+
 	tokens := make(map[int]*Token, len(s.Tokens)+1)
 	for i := 0; i < len(s.Tokens); i++ {
 		index := s.Tokens[i].Index
