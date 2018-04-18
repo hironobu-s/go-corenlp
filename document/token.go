@@ -2,6 +2,7 @@ package document
 
 type Tokens []Token
 
+// Index returns Token with an index of the argument.
 func (ts Tokens) Index(i int) *Token {
 	for _, t := range ts {
 		if t.Index == i {
@@ -11,6 +12,7 @@ func (ts Tokens) Index(i int) *Token {
 	return nil
 }
 
+// Token represents the word in the sentence with some annotations.
 type Token struct {
 	Word         string `json:"word"`
 	OriginalText string `json:"originalText"`

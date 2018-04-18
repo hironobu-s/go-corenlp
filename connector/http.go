@@ -9,6 +9,8 @@ import (
 	"time"
 )
 
+// HTTPClient is a client of Stanford CoreNLP server.
+// https://stanfordnlp.github.io/CoreNLP/corenlp-server.html
 type HTTPClient struct {
 	Endpoint   string
 	Annotators []string
@@ -18,6 +20,7 @@ type HTTPClient struct {
 	ctx context.Context
 }
 
+// NewHTTPClient initializes HttpClient and returns it.
 func NewHTTPClient(ctx context.Context, endpoint string) *HTTPClient {
 	if ctx == nil {
 		ctx = context.Background()
@@ -71,6 +74,7 @@ func (c *HTTPClient) buildRequest(text string) (*http.Request, error) {
 	return req, err
 }
 
+// Run marshals Connector interface implementation.
 func (c *HTTPClient) Run(text string) (response Response, err error) {
 	req, err := c.buildRequest(text)
 	if err != nil {

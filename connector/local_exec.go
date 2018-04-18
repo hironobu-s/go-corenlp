@@ -12,6 +12,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+// LocalExec connector is responsible to run Stanford CoreNLP process.
 type LocalExec struct {
 	JavaCmd   string
 	JavaArgs  []string
@@ -26,6 +27,7 @@ type LocalExec struct {
 	ctx context.Context
 }
 
+// NewLocalExec returns a pointer of LocalExec
 func NewLocalExec(ctx context.Context) *LocalExec {
 	if ctx == nil {
 		ctx = context.Background()
@@ -45,6 +47,7 @@ func NewLocalExec(ctx context.Context) *LocalExec {
 	}
 }
 
+// Run marshals Connector interface implementation.
 func (c *LocalExec) Run(text string) (response Response, err error) {
 	// create tmp file which write the input text
 	tmp, err := ioutil.TempFile("", "go-corenlp")
