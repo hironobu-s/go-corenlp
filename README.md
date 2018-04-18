@@ -1,6 +1,6 @@
 # go-corenlp
 
-`go-corenlp` is Golang wrapper for [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/). This package contains the struct types for the annotators and the connectors which is the way to get the result of annotator.
+`go-corenlp` is Golang wrapper for [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/). 
 
 ## Install
 
