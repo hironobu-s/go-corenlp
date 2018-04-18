@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-type HttpClient struct {
+type HTTPClient struct {
 	Endpoint   string
 	Annotators []string
 	Username   string
@@ -18,17 +18,17 @@ type HttpClient struct {
 	ctx context.Context
 }
 
-func NewHttpClient(ctx context.Context, endpoint string) *HttpClient {
+func NewHTTPClient(ctx context.Context, endpoint string) *HTTPClient {
 	if ctx == nil {
 		ctx = context.Background()
 	}
-	return &HttpClient{
+	return &HTTPClient{
 		Endpoint: endpoint,
 		ctx:      ctx,
 	}
 }
 
-func (c *HttpClient) buildRequest(text string) (*http.Request, error) {
+func (c *HTTPClient) buildRequest(text string) (*http.Request, error) {
 	u, err := url.Parse(c.Endpoint)
 	if err != nil {
 		return nil, err
@@ -71,7 +71,7 @@ func (c *HttpClient) buildRequest(text string) (*http.Request, error) {
 	return req, err
 }
 
-func (c *HttpClient) Run(text string) (response Response, err error) {
+func (c *HTTPClient) Run(text string) (response Response, err error) {
 	req, err := c.buildRequest(text)
 	if err != nil {
 		return nil, err

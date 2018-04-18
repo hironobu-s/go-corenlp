@@ -105,13 +105,13 @@ doc, err := annotator.Annotate(c, text)
 
 ### Connect to CoreNLP server
 
-To connect [CoreNLP server](https://stanfordnlp.github.io/CoreNLP/corenlp-server.html), You may use `HttpClient provider`.
+To connect [CoreNLP server](https://stanfordnlp.github.io/CoreNLP/corenlp-server.html), You may use `HTTPClient provider`.
 
 ```go
 ctx, cancel := context.WithTimeout(context.Background(), 120*time.Second)
 defer cancel()
 
-c := connector.NewHttpClient(ctx, "http://127.0.0.1:9000/")
+c := connector.NewHTTPClient(ctx, "http://127.0.0.1:9000/")
 c.Usernae = "username"
 c.Password = "password"
 
