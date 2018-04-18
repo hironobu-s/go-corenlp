@@ -73,10 +73,10 @@ if err != nil {
 // First sentence
 sentence := doc.Sentences[0]
 
-// Parser 
+// RawParse contains text-based result of Parser annotator
 fmt.Println(sentence.RawParse) // => (ROOT (S (NP (NP (NNP President)...
 
-// Parse() returns the structured result of Parser annotator
+// Parse() returns go's struct of Parser annotator
 parse, _ := sentence.Parse()
 fmt.Printf("%v\n", parse.Pos) // => ROOT
 
