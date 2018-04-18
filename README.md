@@ -26,7 +26,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/hironobu-s/go-corenlp/annotator"
+	"github.com/hironobu-s/go-corenlp/" // exposes "corenlp"
 	"github.com/hironobu-s/go-corenlp/connector"
 )
 
@@ -40,7 +40,7 @@ func main() {
 	c.Annotators = []string{"tokenize", "ssplit", "pos"}
 
 	// Annotate text
-	doc, err := annotator.Annotate(c, text)
+	doc, err := corenlp.Annotate(c, text)
 	if err != nil {
 		panic(err)
 	}
@@ -65,7 +65,7 @@ President(NNP) Xi(NN) Jinping(NN) of(IN) Chaina(NNP),(,) on(IN) his(PRP$) first(
 
 ```go
 // Annotate text
-doc, err := annotator.Annotate(connector.NewLocalExec(nil), text)
+doc, err := corenlp.Annotate(connector.NewLocalExec(nil), text)
 if err != nil {
 	panic(err)
 }
@@ -100,7 +100,7 @@ ctx, cancel := context.WithTimeout(context.Background(), 120*time.Second)
 defer cancel()
 
 c := connector.NewLocalExec(ctx)
-doc, err := annotator.Annotate(c, text)
+doc, err := corenlp.Annotate(c, text)
 ```
 
 ### Connect to CoreNLP server
@@ -115,7 +115,7 @@ c := connector.NewHTTPClient(ctx, "http://127.0.0.1:9000/")
 c.Usernae = "username"
 c.Password = "password"
 
-doc, err := annotator.Annotate(c, text)
+doc, err := corenlp.Annotate(c, text)
 ```
 
 ### Parse json output 

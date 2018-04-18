@@ -1,4 +1,4 @@
-package annotator
+package corenlp
 
 import (
 	"encoding/json"
