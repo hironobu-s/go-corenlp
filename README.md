@@ -26,7 +26,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/hironobu-s/go-corenlp/" // exposes "corenlp"
+	"github.com/hironobu-s/go-corenlp" // exposes "corenlp"
 	"github.com/hironobu-s/go-corenlp/connector"
 )
 
@@ -112,7 +112,7 @@ ctx, cancel := context.WithTimeout(context.Background(), 120*time.Second)
 defer cancel()
 
 c := connector.NewHTTPClient(ctx, "http://127.0.0.1:9000/")
-c.Usernae = "username"
+c.Username = "username"
 c.Password = "password"
 
 doc, err := corenlp.Annotate(c, text)
