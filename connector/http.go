@@ -39,8 +39,11 @@ func (c *HTTPClient) buildRequest(text string) (*http.Request, error) {
 
 	// parameters for CoreNLP server
 	params := map[string]interface{}{
-		"annotators":   strings.Join(c.Annotators, ","),
 		"outputFormat": "json",
+	}
+
+	if len(c.Annotators) > 0 {
+		params["annotators"] = strings.Join(c.Annotators, ",")
 	}
 
 	deadline, ok := c.ctx.Deadline()
