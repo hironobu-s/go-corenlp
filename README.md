@@ -26,7 +26,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/hironobu-s/go-corenlp/" // exposes "corenlp"
+	"github.com/hironobu-s/go-corenlp" // exposes "corenlp"
 	"github.com/hironobu-s/go-corenlp/connector"
 )
 
