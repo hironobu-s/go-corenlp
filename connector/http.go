@@ -3,6 +3,7 @@ package connector
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/url"
 	"strings"
@@ -89,8 +90,10 @@ func (c *HTTPClient) Run(text string) (response Response, err error) {
 	cli := &http.Client{Transport: tr}
 
 	rs, err := cli.Do(req)
-	if err == nil {
-		response = rs.Body
+	if err != nil {
+		return nil, err
+	} else if rs.StatusCode != 200 {
+		return nil, fmt.Errorf("HTTP request failed[%s]", rs.Status)
 	}
-	return response, err
+	return rs.Body, err
 }
