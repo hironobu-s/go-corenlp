@@ -52,11 +52,6 @@ func (c *HTTPClient) buildRequest(text string) (*http.Request, error) {
 		params["timeout"] = d / float64(time.Millisecond)
 	}
 
-	if c.Username != "" && c.Password != "" {
-		params["username"] = c.Username
-		params["password"] = c.Password
-	}
-
 	props, err := json.Marshal(params)
 	if err != nil {
 		return nil, err
@@ -73,6 +68,10 @@ func (c *HTTPClient) buildRequest(text string) (*http.Request, error) {
 	}
 
 	req.Header.Set("Content-Type", "application/json")
+
+	if c.Username != "" && c.Password != "" {
+		req.SetBasicAuth(c.Username, c.Password)
+	}
 
 	return req, err
 }
