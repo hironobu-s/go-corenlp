@@ -1,6 +1,6 @@
 # go-corenlp
 
-`go-corenlp` is Golang wrapper for [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/). 
+`go-corenlp` is a Golang wrapper for [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/). 
 
 ## Install
 
